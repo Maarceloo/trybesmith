@@ -14,10 +14,10 @@ export default class UserController {
     const user = req.body as IUsers;
     const newUser = await this.service.create(user);
 
-    if (!newUser) res.status(404).json('usuario nao cadastrado controller');
+    if (!newUser) return res.status(404).json('usuario nao cadastrado controller');
 
     const senha = process.env.JWT_SECRET || 'senhaSecreta';
     const token = jwt.sign(newUser, senha);
-    res.status(201).json({ token });
+    return res.status(201).json({ token });
   };
 }

@@ -10,6 +10,6 @@ export default class OrderController {
 
   public getAll = async (_req: Request, res: Response) => {
     const orders = await this.service.getAll();
-    res.status(200).json(orders);
+    return res.status(200).json(orders);
   };
 }

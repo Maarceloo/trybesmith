@@ -19,4 +19,12 @@ export default class UserModel {
     const newUser = { id, username, classe, level, password };
     return newUser;
   }
+
+  public async getByUserName(username: string, password: string): Promise<IUsers> {
+    const result = await this.connection.execute(`
+    SELECT * FROM Trybesmith.Users WHERE username=? AND password=?`, [username, password]);
+    const [rows] = result;
+    const [user] = rows as IUsers[];
+    return user;
+  }
 }
